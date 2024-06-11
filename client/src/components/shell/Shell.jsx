@@ -5,6 +5,7 @@ import Terminal, {
   TerminalOutput,
 } from "react-terminal-ui";
 import { socket } from "../../socket/socket";
+import './shell.css'
 
 const Shell = () => {
   const [termialUIIO, setTerminalUIIO] = useState([]);
@@ -55,9 +56,9 @@ const Shell = () => {
 
   return (
     <>
-      <div className="w-screen h-screen bg-[#252a33] relative">
+      <div className="w-full h-full bg-[#252a33] relative">
         <Terminal
-          name="CloudShell: The Web Terminal"
+          name="Terminal"
           scrollToPosition={true}
           colorMode={ColorMode.Dark}
           onInput={(terminalCommand) => {
