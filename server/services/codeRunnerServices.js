@@ -3,6 +3,7 @@ const {
   runCppCodeCmd,
   runNodeJsCodeCmd,
   runPythonCodeCmd,
+  runTypescriptCodeCmd
 } = require("../commands/shellScripts");
 
 const codeRunner = (language, code, shellProcess) => {
@@ -19,9 +20,13 @@ const codeRunner = (language, code, shellProcess) => {
       writeToFile("dev/main.cpp", code);
       shellProcess.stdin.write(runCppCodeCmd + "\n");
       return true;
+    case "typescript":
+      writeToFile("dev/main.ts", code);
+      shellProcess.stdin.write(runTypescriptCodeCmd + "\n");
+      return true;
     default:
       console.log("Invalid language");
-      return false; 
+      return false;
   }
 };
 

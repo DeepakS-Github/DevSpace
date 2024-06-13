@@ -3,6 +3,8 @@ import { FaJava } from "react-icons/fa";
 import { DiJavascript1 } from "react-icons/di";
 import { SiCplusplus } from "react-icons/si";
 import { FaPython } from "react-icons/fa";
+import { SiTypescript } from "react-icons/si";
+import { SiJavascript } from "react-icons/si";
 
 const languages = [
   // {
@@ -11,7 +13,11 @@ const languages = [
   // },
   {
     name: "JavaScript",
-    icon: <DiJavascript1 className="text-2xl" />,
+    icon: <SiJavascript className="text-2xl" />,
+  },
+  {
+    name: "TypeScript",
+    icon: <SiTypescript className="text-2xl" />,
   },
   {
     name: "C++",

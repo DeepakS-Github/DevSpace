@@ -3,13 +3,14 @@ import axios from "axios";
 import { notify } from "../../utils/notification";
 
 const useFileReader = () => {
-  const readFile = (language, setBoilerPlate) => {
+  const readBoilerFile = (language, setBoilerPlate) => {
     let extension;
 
     if (language === "C++") extension = "cpp";
     else if (language === "Java") extension = "java";
     else if (language === "Python") extension = "py";
     else if (language === "JavaScript") extension = "js";
+    else if (language === "TypeScript") extension = "ts";
     else extension="txt";
 
     fetch(`boiler-plate/main.${extension}`)
@@ -29,7 +30,7 @@ const useFileReader = () => {
       });
   };
 
-  return { readFile };
+  return { readBoilerFile };
 };
 
 export default useFileReader;

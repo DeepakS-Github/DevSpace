@@ -3,14 +3,10 @@ import Editor from "@monaco-editor/react";
 import useFileReader from "../../hooks/file-reader/useFileReader";
 
 const CodeEditor = ({ code, setCode, language }) => {
-  const { readFile } = useFileReader();
-
+  const { readBoilerFile } = useFileReader();
 
   useEffect(() => {
-    readFile(
-      language,
-      setCode
-    );
+    readBoilerFile(language, setCode);
   }, [language]);
 
   const setEditorTheme = (monaco) => {
@@ -24,11 +20,26 @@ const CodeEditor = ({ code, setCode, language }) => {
     });
   };
 
+  const getLanguage = (lang) => {
+    switch (lang) {
+      case "C++":
+        return "cpp";
+      case "JavaScript":
+        return "javascript";
+      case "TypeScript":
+        return "typescript";
+      case "Python":
+        return "python";
+      default:
+        return "plaintext";
+    }
+  };
+
   return (
     <>
       <Editor
         beforeMount={setEditorTheme}
-        language={language === "C++" ? "cpp" : language.toLowerCase()}
+        language={getLanguage(language)}
         height={"94vh"}
         theme="customTheme"
         value={code}
