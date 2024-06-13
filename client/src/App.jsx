@@ -9,7 +9,7 @@ import Shell from "./components/shell/Shell";
 
 const App = () => {
 
-  const [selectedLanguage, setSelectedLanguage] = useState("Java");
+  const [selectedLanguage, setSelectedLanguage] = useState("JavaScript");
   const [code, setCode] = useState("");
 
   return (
@@ -20,7 +20,7 @@ const App = () => {
       </div>
       <div className="w-[56%] h-full relative">
         <CodeRunnerBtn code={code} language={selectedLanguage} />
-        <CodeEditor setCode={setCode} language={selectedLanguage}/>
+        <CodeEditor code={code} setCode={setCode} language={selectedLanguage}/>
         <LanguageFooter selectedLanguage={selectedLanguage}/>
       </div>
       <div className="w-[40%] h-full">

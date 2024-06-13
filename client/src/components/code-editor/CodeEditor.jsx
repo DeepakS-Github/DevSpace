@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
+import useFileReader from "../../hooks/file-reader/useFileReader";
 
-const CodeEditor = ({setCode, language}) => {
+const CodeEditor = ({ code, setCode, language }) => {
+  const { readFile } = useFileReader();
+
+
+  useEffect(() => {
+    readFile(
+      language,
+      setCode
+    );
+  }, [language]);
+
   const setEditorTheme = (monaco) => {
     monaco.editor.defineTheme("customTheme", {
       base: "vs-dark",
@@ -17,9 +28,10 @@ const CodeEditor = ({setCode, language}) => {
     <>
       <Editor
         beforeMount={setEditorTheme}
-        language={language==="C++"?"cpp":language.toLowerCase()}
+        language={language === "C++" ? "cpp" : language.toLowerCase()}
         height={"94vh"}
         theme="customTheme"
+        value={code}
         onChange={(value) => setCode(value)}
         options={{
           inlineSuggest: true,

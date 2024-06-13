@@ -5,23 +5,23 @@ const {
   runPythonCodeCmd,
 } = require("../commands/shellScripts");
 
-const codeRunner = (language, code, shellProcess, res) => {
+const codeRunner = (language, code, shellProcess) => {
   switch (language.toLowerCase()) {
     case "javascript":
       writeToFile("dev/main.js", code);
       shellProcess.stdin.write(runNodeJsCodeCmd + "\n");
-      break;
+      return true;
     case "python":
       writeToFile("dev/main.py", code);
       shellProcess.stdin.write(runPythonCodeCmd + "\n");
-      break;
+      return true;
     case "c++":
       writeToFile("dev/main.cpp", code);
       shellProcess.stdin.write(runCppCodeCmd + "\n");
-      break;
+      return true;
     default:
       console.log("Invalid language");
-      return true; 
+      return false; 
   }
 };
 

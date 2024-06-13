@@ -53,11 +53,11 @@ app.post("/run/:language", (req, res) => {
   try {
     let code = req.body.code;
     const language = req.params.language;
-    let isInvalidLanguage = codeRunner(language, code, shellProcess);
-    if (isInvalidLanguage) {
-      res.status(400).send({ message: "Invalid language" });
-    } else {
+    let isExecutedSuccessfully = codeRunner(language, code, shellProcess);
+    if (isExecutedSuccessfully) {
       res.status(200).send({ message: "Code running..." });
+    } else {
+      res.status(400).send({ message: "Invalid language" });
     }
   } catch (error) {
     console.error(error);
