@@ -1,6 +1,6 @@
 .react-terminal-wrapper {
   height: 100%;
-  background: #181818;
+  background: #181818 !important;
 }
 
 .react-terminal {

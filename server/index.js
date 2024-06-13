@@ -3,10 +3,17 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { spawn } = require("child_process");
 const os = require("os");
+const { codeRunner } = require("./services/codeRunnerServices");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+app.use(cors());
+app.use(express.json());
+
+let shellProcess;
 
 io.on("connection", (socket) => {
   console.log("Client connected");
@@ -18,8 +25,7 @@ io.on("connection", (socket) => {
     shell = "bash";
   }
 
-
-  const shellProcess = spawn(shell, shell === "bash" ? ["-i"] : [], {
+  shellProcess = spawn(shell, shell === "bash" ? ["-i"] : [], {
     stdio: ["pipe", "pipe", "pipe"],
   });
 
@@ -41,6 +47,22 @@ io.on("connection", (socket) => {
     shellProcess.kill();
     console.log("Client disconnected");
   });
+});
+
+app.post("/run/:language", (req, res) => {
+  try {
+    let code = req.body.code;
+    const language = req.params.language;
+    let isInvalidLanguage = codeRunner(language, code, shellProcess);
+    if (isInvalidLanguage) {
+      res.status(400).send({ message: "Invalid language" });
+    } else {
+      res.status(200).send({ message: "Code running..." });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Something went wrong!" });
+  }
 });
 
 server.listen(8080, () => {

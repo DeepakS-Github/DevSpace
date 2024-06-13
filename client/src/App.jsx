@@ -1,24 +1,27 @@
+import { useState } from "react";
 import CodeRunnerBtn from "./components/buttons/CodeRunnerBtn";
 import CodeEditor from "./components/code-editor/CodeEditor";
 import LanguageBar from "./components/language-bar/LanguageBar";
+import LanguageFooter from "./components/language-footer/LanguageFooter";
+import ProfileImg from "./components/profile/ProfileImg";
 import Shell from "./components/shell/Shell";
 
 
 const App = () => {
+
+  const [selectedLanguage, setSelectedLanguage] = useState("Java");
+  const [code, setCode] = useState("");
+
   return (
     <div className="flex flex-row w-screen h-screen ">
       <div className="h-full w-[4%] bg-[#181818]">
-        <div className="h-[6vh] grid place-items-center p-1">
-          <img src="/download.jpeg" className="rounded-full overflow-hidden object-cover h-full aspect-square bg-green-800"/>
-        </div>
-        <LanguageBar />
+        <ProfileImg/>
+        <LanguageBar selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage}/>
       </div>
-      <div className="w-[56%] h-full">
-        <CodeRunnerBtn />
-        <CodeEditor />
-        <div className="h-[2vh] w-full bg-[#181818]">
-
-        </div>
+      <div className="w-[56%] h-full relative">
+        <CodeRunnerBtn code={code} language={selectedLanguage} />
+        <CodeEditor setCode={setCode} language={selectedLanguage}/>
+        <LanguageFooter selectedLanguage={selectedLanguage}/>
       </div>
       <div className="w-[40%] h-full">
         <Shell />

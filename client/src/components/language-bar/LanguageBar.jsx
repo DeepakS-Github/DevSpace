@@ -5,10 +5,10 @@ import { SiCplusplus } from "react-icons/si";
 import { FaPython } from "react-icons/fa";
 
 const languages = [
-  {
-    name: "Java",
-    icon: <FaJava className="text-2xl" />,
-  },
+  // {
+  //   name: "Java",
+  //   icon: <FaJava className="text-2xl" />,
+  // },
   {
     name: "JavaScript",
     icon: <DiJavascript1 className="text-2xl" />,
@@ -23,12 +23,19 @@ const languages = [
   },
 ];
 
-const LanguageBar = () => {
+const LanguageBar = ({ selectedLanguage, setSelectedLanguage }) => {
   return (
     <div className="m-2 flex flex-col justify-between h-[90vh]">
       <div className="flex flex-col gap-2 justify-center">
         {languages.map((language) => (
-          <button className="border-[#1f1f1f] bg-[#1f1f1f] border-2 text-white p-2 aspect-square grid place-items-center rounded-lg w-full hover:bg-[#252a33]">
+          <button
+            className={`border-[#1f1f1f] ${
+              selectedLanguage === language.name
+                ? "bg-green-700 border-green-700"
+                : "bg-[#1f1f1f] hover:bg-[#252a33]"
+            } border-2 text-white p-2 aspect-square grid place-items-center rounded-lg w-full `}
+            onClick={() => setSelectedLanguage(language.name)}
+          >
             {language.icon}
           </button>
         ))}

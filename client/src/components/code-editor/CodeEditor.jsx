@@ -1,7 +1,7 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
 
-const CodeEditor = () => {
+const CodeEditor = ({setCode, language}) => {
   const setEditorTheme = (monaco) => {
     monaco.editor.defineTheme("customTheme", {
       base: "vs-dark",
@@ -15,26 +15,25 @@ const CodeEditor = () => {
 
   return (
     <>
-    <Editor
-      beforeMount={setEditorTheme}
-      language="javascript"
-      height={"92vh"}
-      theme="customTheme"
-      value={"console.log('hello')"}
-      options={{
-        inlineSuggest: true,
-        fontSize: 14,
-        readOnlyMessage: { value: "Read only editor" },
-        formatOnType: true,
-        autoClosingBrackets: "always",
-        // readOnly: true,
-        minimap: { enabled: false },
-        padding: {
-          top: 10,
-          bottom: 10,
-        },
-      }}
-    />
+      <Editor
+        beforeMount={setEditorTheme}
+        language={language==="C++"?"cpp":language.toLowerCase()}
+        height={"94vh"}
+        theme="customTheme"
+        onChange={(value) => setCode(value)}
+        options={{
+          inlineSuggest: true,
+          fontSize: 14,
+          // readOnlyMessage: { value: "Read only editor" },
+          formatOnType: true,
+          autoClosingBrackets: "always",
+          // readOnly: true,
+          minimap: { enabled: false },
+          padding: {
+            top: 10,
+          },
+        }}
+      />
     </>
   );
 };
