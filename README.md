@@ -37,7 +37,7 @@ To set up DevSpace locally, follow these steps:
     cd DevSpace
     ```
 
-2. **Start the Docker environment**:
+2. **Start the Docker environment (may take some time)**:
     ```bash
     docker-compose up
     ```
